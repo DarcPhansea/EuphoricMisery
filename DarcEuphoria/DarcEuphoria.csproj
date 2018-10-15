@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{48AC5A40-2985-4814-BAB1-30A684018742}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DarcEuphoria</RootNamespace>
+    <AssemblyName>EuphoricMisery</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DarcEuphoria.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DllExportIdent>A9AD67CC-C7FF-425A-B8DF-4BB88F13334A</DllExportIdent>
+    <DllExportMetaLibName>DllExport.dll</DllExportMetaLibName>
+    <DllExportNamespace>DarcEuphoria</DllExportNamespace>
+    <DllExportDDNSCecil>true</DllExportDDNSCecil>
+    <PlatformTarget>x86</PlatformTarget>
+    <DllExportOrdinalsBase>1</DllExportOrdinalsBase>
+    <DllExportGenExpLib>false</DllExportGenExpLib>
+    <DllExportOurILAsm>false</DllExportOurILAsm>
+    <DllExportLeaveIntermediateFiles>false</DllExportLeaveIntermediateFiles>
+    <DllExportTimeout>30000</DllExportTimeout>
+    <DllExportPeCheck>2</DllExportPeCheck>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon_T6Z_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DllExport, PublicKeyToken=8337224c9ad9e356">
+      <HintPath>$(SolutionDir)packages\DllExport.1.6.1\gcache\metalib\$(DllExportNamespace)\$(DllExportMetaLibName)</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct2D1.4.2.0\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Costura">
+      <HintPath>..\packages\Costura.Fody.3.1.2\lib\net46\Costura.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Euphoric\Allocator.cs" />
+    <Compile Include="Euphoric\BspParsing\BSPFile.cs" />
+    <Compile Include="Euphoric\BspParsing\BSPFlags.cs" />
+    <Compile Include="Euphoric\BspParsing\ContentsFlag.cs" />
+    <Compile Include="Euphoric\BspParsing\cplane_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dbrushside_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dbrush_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dedge_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dface_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dgamelumpheader_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dgamelump_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dheader_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dleaf_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dnode_t.cs" />
+    <Compile Include="Euphoric\BspParsing\dplane_t.cs" />
+    <Compile Include="Euphoric\BspParsing\eLumpIndex.cs" />
+    <Compile Include="Euphoric\BspParsing\lump_t.cs" />
+    <Compile Include="Euphoric\BspParsing\mvertex_t.cs" />
+    <Compile Include="Euphoric\BspParsing\Polygon.cs" />
+    <Compile Include="Euphoric\BspParsing\snode_t.cs" />
+    <Compile Include="Euphoric\BspParsing\StaticPropDictLump_t.cs" />
+    <Compile Include="Euphoric\BspParsing\StaticPropLeafLump_t.cs" />
+    <Compile Include="Euphoric\BspParsing\StaticPropLump_t.cs" />
+    <Compile Include="Euphoric\BspParsing\StreamExtension.cs" />
+    <Compile Include="Euphoric\BspParsing\texinfo_t.cs" />
+    <Compile Include="Euphoric\BspParsing\VPlane.cs" />
+    <Compile Include="Euphoric\Classes\MouseOperations.cs" />
+    <Compile Include="Euphoric\Classes\Signature.cs" />
+    <Compile Include="Euphoric\Configs\Enums\BoxMode.cs" />
+    <Compile Include="Euphoric\Configs\Enums\ClanMode.cs" />
+    <Compile Include="Euphoric\Configs\Enums\GlowMode.cs" />
+    <Compile Include="Euphoric\Configs\Enums\HealthMode.cs" />
+    <Compile Include="Euphoric\Configs\Enums\PriorityMode.cs" />
+    <Compile Include="Euphoric\Configs\Handler.cs" />
+    <Compile Include="Euphoric\Configs\Structs\AimbotSettings.cs" />
+    <Compile Include="Euphoric\Configs\Structs\AimbotWeaponCfgs.cs" />
+    <Compile Include="Euphoric\Configs\Structs\MainSettings.cs" />
+    <Compile Include="Euphoric\Configs\Structs\MiscSettings.cs" />
+    <Compile Include="Euphoric\Configs\Structs\SkinChangerSettings.cs" />
+    <Compile Include="Euphoric\Configs\Structs\SkinData.cs" />
+    <Compile Include="Euphoric\Configs\Structs\TriggerbotSettings.cs" />
+    <Compile Include="Euphoric\Configs\Structs\TriggerbotWeaponCfgs.cs" />
+    <Compile Include="Euphoric\Configs\Structs\VisualSettings.cs" />
+    <Compile Include="Euphoric\Configs\Structs\VisualsPlayer.cs" />
+    <Compile Include="Euphoric\Controls\DeBitmap.cs" />
+    <Compile Include="Euphoric\Controls\DeButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeColorPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeColorPicker.Designer.cs">
+      <DependentUpon>DeColorPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeDBPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DePanelTransparent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeRadar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeSlider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeVisualSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeVisualSelect.Designer.cs">
+      <DependentUpon>DeVisualSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeWeaponSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Euphoric\Controls\DeWeaponSelect.Designer.cs">
+      <DependentUpon>DeWeaponSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Euphoric\CSGO\CSGOClient.cs" />
+    <Compile Include="Euphoric\CSGO\CSGOEngine.cs" />
+    <Compile Include="Euphoric\CSGO\Entity\BaseLocalPlayer.cs" />
+    <Compile Include="Euphoric\CSGO\Entity\BasePlayer.cs" />
+    <Compile Include="Euphoric\CSGO\Entity\BaseEntity.cs" />
+    <Compile Include="Euphoric\CSGO\Entity\BaseWeapon.cs" />
+    <Compile Include="Euphoric\CSGO\Entity\Prototype.cs" />
+    <Compile Include="Euphoric\CSGO\Netvars.cs" />
+    <Compile Include="Euphoric\CSGO\Offsets.cs" />
+    <Compile Include="Euphoric\Enums\FreeType.cs" />
+    <Compile Include="Euphoric\Enums\LifeState.cs" />
+    <Compile Include="Euphoric\Enums\ProcessAccessFlags.cs" />
+    <Compile Include="Euphoric\Enums\Ranks.cs" />
+    <Compile Include="Euphoric\Enums\SkinList.cs" />
+    <Compile Include="Euphoric\Enums\TargetBones.cs" />
+    <Compile Include="Euphoric\Enums\VirtualKeys.cs" />
+    <Compile Include="Euphoric\Enums\WeaponID.cs" />
+    <Compile Include="Euphoric\GlobalVariables.cs" />
+    <Compile Include="Euphoric\MarshalSize.cs" />
+    <Compile Include="Euphoric\Maths.cs" />
+    <Compile Include="Euphoric\Memory.cs" />
+    <Compile Include="Euphoric\ProcessScanner\NetvarManager.cs" />
+    <Compile Include="Euphoric\ProcessScanner\OffsetScanner.cs" />
+    <Compile Include="Euphoric\SkinParser.cs" />
+    <Compile Include="Euphoric\Structs\Bone.cs" />
+    <Compile Include="Euphoric\Structs\BonePos.cs" />
+    <Compile Include="Euphoric\Classes\Devalue.cs" />
+    <Compile Include="Euphoric\Structs\DrawArea.cs" />
+    <Compile Include="Euphoric\Structs\GlobalVarsBase.cs" />
+    <Compile Include="Euphoric\Structs\GlowColor.cs" />
+    <Compile Include="Euphoric\Structs\GlowSettings.cs" />
+    <Compile Include="Euphoric\Structs\Matrix4x4.cs" />
+    <Compile Include="Euphoric\Structs\Module.cs" />
+    <Compile Include="Euphoric\Structs\Rect.cs" />
+    <Compile Include="Euphoric\Structs\RENDERCOLOR.cs" />
+    <Compile Include="Euphoric\Structs\Vector2.cs" />
+    <Compile Include="Euphoric\Structs\Vector3.cs" />
+    <Compile Include="Euphoric\Structs\WeaponData.cs" />
+    <Compile Include="Euphoric\WinApi.cs" />
+    <Compile Include="Hacks\Aimbot.cs" />
+    <Compile Include="Hacks\AutoHop.cs" />
+    <Compile Include="Hacks\FakeLag.cs" />
+    <Compile Include="Hacks\Injection\ChatSpam.cs" />
+    <Compile Include="Hacks\Injection\ClanChanger.cs" />
+    <Compile Include="Hacks\Injection\ClientCmd.cs" />
+    <Compile Include="Hacks\Injection\CreateThread.cs" />
+    <Compile Include="Hacks\Injection\NameChanger.cs" />
+    <Compile Include="Hacks\Injection\RankRevealer.cs" />
+    <Compile Include="Hacks\MainThread.cs" />
+    <Compile Include="Hacks\SkinChanger.cs" />
+    <Compile Include="Hacks\ThirdPerson.cs" />
+    <Compile Include="Hacks\Triggerbot.cs" />
+    <Compile Include="Hacks\Visuals\ActiveWeapon.cs" />
+    <Compile Include="Hacks\Visuals\AimbotFov.cs" />
+    <Compile Include="Hacks\Visuals\Box2D.cs" />
+    <Compile Include="Hacks\Visuals\Box3D.cs" />
+    <Compile Include="Hacks\Visuals\BoxCorners.cs" />
+    <Compile Include="Hacks\Visuals\Crosshair.cs" />
+    <Compile Include="Hacks\Visuals\Glow.cs" />
+    <Compile Include="Hacks\Visuals\Health.cs" />
+    <Compile Include="Hacks\Visuals\ItemESP.cs" />
+    <Compile Include="Hacks\Visuals\ItemsLoop.cs" />
+    <Compile Include="Hacks\Visuals\Name.cs" />
+    <Compile Include="Hacks\Visuals\PlayersLoop.cs" />
+    <Compile Include="Hacks\Visuals\Radar.cs" />
+    <Compile Include="Hacks\Visuals\Rank.cs" />
+    <Compile Include="Hacks\Visuals\SnapLines.cs" />
+    <Compile Include="Hacks\Visuals\VisualMain.cs" />
+    <Compile Include="Hacks\Visuals\VMaths.cs" />
+    <Compile Include="WndOverlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WndOverlay.Designer.cs">
+      <DependentUpon>WndOverlay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Euphoric\Controls\DeColorPicker.resx">
+      <DependentUpon>DeColorPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Euphoric\Controls\DeVisualSelect.resx">
+      <DependentUpon>DeVisualSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Euphoric\Controls\DeWeaponSelect.resx">
+      <DependentUpon>DeWeaponSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WndOverlay.resx">
+      <DependentUpon>WndOverlay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon_T6Z_icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.3.2.4\build\Fody.targets" Condition="Exists('..\packages\Fody.3.2.4\build\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets')" />
+  <ImportGroup Label=".NET DllExport">
+    <Import Project="$(SolutionDir)packages\DllExport.1.6.1\tools\net.r_eg.DllExport.targets" Condition="Exists('$(SolutionDir)packages\DllExport.1.6.1\tools\net.r_eg.DllExport.targets')" Label="8337224c9ad9e356" />
+  </ImportGroup>
+  <Target Name="DllExportRestorePkg" BeforeTargets="PrepareForBuild">
+    <Warning Condition="!Exists('$(SolutionDir)DllExport.bat')" Text="We can't find 'DllExport.bat' in '$(SolutionDir)' - https://github.com/3F/DllExport" />
+    <Exec Condition="('$(DllExportModImported)' != 'true' Or !Exists('$(SolutionDir)packages\DllExport.1.6.1\tools\net.r_eg.DllExport.targets')) And Exists('$(SolutionDir)DllExport.bat')" Command="cd &quot;$(SolutionDir)&quot; &amp; DllExport.bat  -action Restore" />
+  </Target>
+  <Target Name="DllExportRPkgDynamicImport" BeforeTargets="PostBuildEvent" DependsOnTargets="GetFrameworkPaths" Condition="'$(DllExportModImported)' != 'true' And '$(DllExportRPkgDyn)' != 'false'">
+    <MSBuild BuildInParallel="true" UseResultsCache="true" Projects="$(MSBuildProjectFullPath)" Properties="DllExportRPkgDyn=true" Targets="Build" />
+  </Target>
+</Project>

@@ -16,6 +16,7 @@ namespace DarcEuphoria.Hacks
         private static bool onceMouse = true;
         private static bool onceThird;
         private static bool onceRank = false;
+        private static bool loadedMap = false;
 
         public static void Start()
         {
@@ -37,11 +38,15 @@ namespace DarcEuphoria.Hacks
 
             while (GlobalVariables.IsActive)
             {
+                GlobalVariables.GlobalRefresh++;
+
                 if (!csClient.InGame)
                 {
                     csClient.SendPackets = true;
                     onceRank = false;
                     VisualMain.Start(GlobalVariables.Device);
+                    loadedMap = false;
+                    Thread.Sleep(1000);
                     continue;
                 }
 
@@ -60,20 +65,23 @@ namespace DarcEuphoria.Hacks
                 GlobalVariables.EntityList = BaseWeapon.EntityList;
 
                 #region BSP
+                if (!loadedMap)
+                {
+                    var MapPath = string.Format(@"{0}\csgo\maps\{1}.bsp",
+                        GlobalVariables.CSGO.Modules[0].FileName
+                            .Substring(0, GlobalVariables.CSGO.Modules[0].FileName.Length - 9),
+                        csClient.MapName);
 
-                var MapPath = string.Format(@"{0}\csgo\maps\{1}.bsp",
-                    GlobalVariables.CSGO.Modules[0].FileName
-                        .Substring(0, GlobalVariables.CSGO.Modules[0].FileName.Length - 9),
-                    csClient.MapName);
+                    if (!csClient.InGame)
+                        LoadBSPFile("null");
 
-                if (!csClient.InGame)
-                    LoadBSPFile("null");
+                    if (bspMap == null)
+                        LoadBSPFile(MapPath);
+                    else if (bspMap.FileName != MapPath)
+                        LoadBSPFile(MapPath);
 
-                if (bspMap == null)
-                    LoadBSPFile(MapPath);
-                else if (bspMap.FileName != MapPath)
-                    LoadBSPFile(MapPath);
-
+                    loadedMap = true;
+                }
                 #endregion
 
                 #region LocalPlayer
@@ -84,77 +92,14 @@ namespace DarcEuphoria.Hacks
 
                 #endregion
 
-                Thread.Sleep(5);
-
-                csClient.PostProcessDisabled.Value =
-                    GlobalVariables.ActiveSettings.MiscSettings.NoPostProcessing;
-
-                LocalPlayer.FlashAlpha.Value =
-                    (float) GlobalVariables.ActiveSettings.MiscSettings.FlashAlpha;
-
-                if (LocalPlayer.DefaultFOV.Value != (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView ||
-                    LocalPlayer.ActiveWeapon.WeaponID.Value == 8 ||
-                    LocalPlayer.ActiveWeapon.WeaponID.Value == 39)
+                if (GlobalVariables.InMenu)
                 {
-                    if (LocalPlayer.ActiveWeapon.WeaponID.Value != 8 &&
-                        LocalPlayer.ActiveWeapon.WeaponID.Value != 39)
-                    {
-                        if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 0)
-                            LocalPlayer.DefaultFOV.Value =
-                                (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
-                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 1)
-                            LocalPlayer.DefaultFOV.Value = 40;
-                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 2)
-                            LocalPlayer.DefaultFOV.Value = 10;
-                    }
-                    else
-                    {
-                        if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 0)
-                        {
-                            if (LocalPlayer.DefaultFOV.Value !=
-                                (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView)
-                                LocalPlayer.DefaultFOV.Value =
-                                    (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
-                        }
-                        else if (LocalPlayer.DefaultFOV.Value != 90)
-                        {
-                            LocalPlayer.DefaultFOV.Value = 90;
-                        }
-                    }
+                    csClient.PostProcessDisabled.Value =
+                        GlobalVariables.ActiveSettings.MiscSettings.NoPostProcessing;
+
+                    LocalPlayer.FlashAlpha.Value =
+                        (float)GlobalVariables.ActiveSettings.MiscSettings.FlashAlpha;
                 }
-
-                if (LocalPlayer.FOV.Value != (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView ||
-                    !LocalPlayer.ActiveWeapon.AbleToFire)
-                {
-                    if (LocalPlayer.ActiveWeapon.WeaponID.Value != 8 &&
-                        LocalPlayer.ActiveWeapon.WeaponID.Value != 39)
-                    {
-                        if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 0 || !LocalPlayer.ActiveWeapon.AbleToFire)
-                        {
-                            LocalPlayer.FOV.Value = (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
-                            LocalPlayer.DefaultFOV.Value =
-                                (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
-                        }
-                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 1)
-                        {
-                            LocalPlayer.FOV.Value = 40;
-                        }
-                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 2)
-                        {
-                            LocalPlayer.FOV.Value = 10;
-                        }
-                    }
-                    else
-                    {
-                        LocalPlayer.FOV.Value = (int) GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
-                    }
-                }
-
-                if (LocalPlayer.Scoped.Value && LocalPlayer.ActiveWeapon.IsSniper())
-                    LocalPlayer.DrawViewModel.Value = false;
-                else if (!LocalPlayer.DrawViewModel.Value)
-                    LocalPlayer.DrawViewModel.Value = true;
-
 
                 if (GlobalVariables.ActiveSettings.MiscSettings.FakeLag)
                     FakeLag.Start();
@@ -171,6 +116,73 @@ namespace DarcEuphoria.Hacks
                     AutoHop.Start();
 
                 VisualMain.Start(GlobalVariables.Device);
+
+                #region FOV
+
+                if (LocalPlayer.DefaultFOV.Value != (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView ||
+                    LocalPlayer.ActiveWeapon.WeaponID.Value == 8 ||
+                    LocalPlayer.ActiveWeapon.WeaponID.Value == 39)
+                {
+                    if (LocalPlayer.ActiveWeapon.WeaponID.Value != 8 &&
+                        LocalPlayer.ActiveWeapon.WeaponID.Value != 39)
+                    {
+                        if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 0)
+                            LocalPlayer.DefaultFOV.Value =
+                                (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
+                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 1)
+                            LocalPlayer.DefaultFOV.Value = 40;
+                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 2)
+                            LocalPlayer.DefaultFOV.Value = 10;
+                    }
+                    else
+                    {
+                        if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 0)
+                        {
+                            if (LocalPlayer.DefaultFOV.Value !=
+                                (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView)
+                                LocalPlayer.DefaultFOV.Value =
+                                    (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
+                        }
+                        else if (LocalPlayer.DefaultFOV.Value != 90)
+                        {
+                            LocalPlayer.DefaultFOV.Value = 90;
+                        }
+                    }
+                }
+
+                if (LocalPlayer.FOV.Value != (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView ||
+                    !LocalPlayer.ActiveWeapon.AbleToFire)
+                {
+                    if (LocalPlayer.ActiveWeapon.WeaponID.Value != 8 &&
+                        LocalPlayer.ActiveWeapon.WeaponID.Value != 39)
+                    {
+                        if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 0 || !LocalPlayer.ActiveWeapon.AbleToFire)
+                        {
+                            LocalPlayer.FOV.Value = (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
+                            LocalPlayer.DefaultFOV.Value =
+                                (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
+                        }
+                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 1)
+                        {
+                            LocalPlayer.FOV.Value = 40;
+                        }
+                        else if (LocalPlayer.ActiveWeapon.ZoomLevel.Value == 2)
+                        {
+                            LocalPlayer.FOV.Value = 10;
+                        }
+                    }
+                    else
+                    {
+                        LocalPlayer.FOV.Value = (int)GlobalVariables.ActiveSettings.MiscSettings.FieldOfView;
+                    }
+                }
+
+                if (LocalPlayer.Scoped.Value && LocalPlayer.ActiveWeapon.IsSniper())
+                    LocalPlayer.DrawViewModel.Value = false;
+                else if (!LocalPlayer.DrawViewModel.Value)
+                    LocalPlayer.DrawViewModel.Value = true;
+
+                #endregion
 
                 LocalPlayer.ThirdPerson = GlobalVariables.ActiveSettings.MiscSettings.ThirdPerson;
                 //ThirdPerson.Start();
@@ -215,7 +227,7 @@ namespace DarcEuphoria.Hacks
                     onceRank = false;
                 }
 
-                
+                Thread.Sleep(10);
             }
 
             GlobalVariables.SHUTDOWN = true;

@@ -22,7 +22,7 @@ namespace DarcEuphoria.Euphoric.CSGO
             PostProcessDisabled = new Devalue<bool>(Memory.Client.Base + Offsets.s_bOverridePostProcessingDisable);
             EntityListLength = new Devalue<int>(Memory.Engine.Base + Offsets.dwEntityListLength);
             TickBase = new Devalue<int>(Memory.Client.Base + Netvars.m_nTickBase);
-            Matrix4 = new Devalue<Matrix4x4>(Memory.Client.Base + Offsets.dwViewMatrix);
+            Matrix4 = new Devalue<Matrix4x4>(Memory.Client.Base + Offsets.dwViewMatrix, false, 2);
             GlowObjectManager = new Devalue<int>(Memory.Client.Base + Offsets.dwGlowObjectManager);
             GlobalVarsBase = new Devalue<CGlobalVarsBase>(Memory.Engine.Base + Offsets.dwGlobalVars);
         }

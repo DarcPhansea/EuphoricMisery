@@ -35,10 +35,16 @@ namespace DarcEuphoria.Euphoric.CSGO.Entity
             SetFields();
         }
 
+        private static int refresh = 0;
         public static BasePlayer[] PlayerList
         {
             get
             {
+                if (refresh > GlobalVariables.GlobalRefresh)
+                    return GlobalVariables.PlayerList;
+
+                refresh = GlobalVariables.GlobalRefresh + 100;
+
                 var returnArray = new List<BasePlayer>();
                 for (var i = 0; i < 64; i++)
                 {

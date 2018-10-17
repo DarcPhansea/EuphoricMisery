@@ -61,10 +61,16 @@ namespace DarcEuphoria.Euphoric.CSGO.Entity
             IsDormant = new Devalue<bool>(Pointer + Offsets.m_bDormant);
         }
 
+        private static int refresh = 0;
         public static BaseWeapon[] EntityList
         {
             get
             {
+                if (refresh > GlobalVariables.GlobalRefresh)
+                    return GlobalVariables.EntityList;
+
+                refresh = GlobalVariables.GlobalRefresh + 100;
+
                 var returnArray = new List<BaseWeapon>();
 
                 for (var i = 65; i < CSGOEngine.csClient.EntityListLength.Value; i++)

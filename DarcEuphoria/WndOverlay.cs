@@ -241,25 +241,24 @@ namespace DarcEuphoria
 
         private void gui_Thread_DoWork(object sender, DoWorkEventArgs e)
         {
+            Invoke((MethodInvoker) delegate
+            {
+                BringToFront();
+            });
+
             while (GlobalVariables.IsActive)
             {
                 if (Process.GetProcessesByName("csgo").Length == 0) Memory.CloseCheat();
 
-                GlobalVariables.GlobalRefresh++;
+                Thread.Sleep(100);
 
                 var rect = new RECT();
                 WinApi.GetClientRect(GlobalVariables.CSGO.MainWindowHandle, out rect);
 
                 Invoke((MethodInvoker) delegate
                 {
-                    BringToFront();
-                    RADAR.SendToBack();
                     Size = new Size(rect.Right, rect.Bottom);
                     GlobalVariables.ScreenSize = Size;
-
-                    Radar.Center = new Point(
-                        RADAR.Width / 2 + RADAR.Location.X,
-                        RADAR.Height / 2 + RADAR.Location.Y);
 
                     #region Menu
 
@@ -298,9 +297,18 @@ namespace DarcEuphoria
 
                     if (GlobalVariables.ActiveSettings.MiscSettings.ExternalRadar)
                     {
+
+                        RADAR.SendToBack();
+
+                        Radar.Center = new Point(
+                            RADAR.Width / 2 + RADAR.Location.X,
+                            RADAR.Height / 2 + RADAR.Location.Y);
+
                         RADAR.Visible = true;
                         RADAR.Width = RADAR.Height =
                             (int) GlobalVariables.ActiveSettings.MiscSettings.ExternalRadarSize * 4 + 1;
+
+
                     }
                     else
                     {
@@ -344,8 +352,6 @@ namespace DarcEuphoria
 
                     SaveCheat();
                 });
-
-                Thread.Sleep(1);
             }
         }
 
